@@ -61,7 +61,7 @@ jobs:
   android_build:
     runs-on: ubuntu-20.04
     needs: [check_version]
-    # if: needs.check_version.outputs.ALREADY_RELEASE == '0'
+    if: needs.check_version.outputs.ALREADY_RELEASE == '0'
 
     steps:
       - uses: actions/checkout@v4
