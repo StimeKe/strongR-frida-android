@@ -59,7 +59,7 @@ jobs:
             }
 
   android_build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     needs: [check_version]
     if: needs.check_version.outputs.ALREADY_RELEASE == '0'
 
