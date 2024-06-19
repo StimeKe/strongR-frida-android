@@ -103,7 +103,7 @@ jobs:
           curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
           curl -sSL https://get.rvm.io | bash -s stable
           source ~/.rvm/scripts/rvm
-          rvm install ruby
+          rvm install ruby --with-openssl-dir=/usr/include/openssl || (cat /home/runner/.rvm/log/$(date +%s)_ruby-3.0.0/make.log && exit 1)
           rvm use ruby --default
 
       - name: build frida for Android
