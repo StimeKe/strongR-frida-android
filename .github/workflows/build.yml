@@ -91,12 +91,20 @@ jobs:
 
       - name: install dependencies
         run: |
-          sudo apt-get update && DEBIAN_FRONTEND=noninteractive sudo apt-get install build-essential tree ninja-build gcc-multilib g++-multilib lib32stdc++-9-dev flex bison xz-utils ruby ruby-dev python3-requests python3-setuptools python3-dev python3-pip libc6-dev libc6-dev-i386 -y
-          sudo gem update --system
-          sudo gem install ffi -v 1.17.0 --no-document
-          sudo gem install fpm -v 1.11.0 --no-document
+          sudo apt-get update && DEBIAN_FRONTEND=noninteractive sudo apt-get install build-essential tree ninja-build gcc-multilib g++-multilib lib32stdc++-9-dev flex bison xz-utils python3-requests python3-setuptools python3-dev python3-pip libc6-dev libc6-dev-i386 -y
           python3 -m pip install lief
           python3 -m pip install graphlib
+      
+      - name: install ruby
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl gpg
+          curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+          curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+          curl -sSL https://get.rvm.io | bash -s stable
+          source ~/.rvm/scripts/rvm
+          rvm install ruby
+          rvm use ruby --default
 
       - name: build frida for Android
         shell: bash
